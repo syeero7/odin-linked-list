@@ -163,5 +163,25 @@ export default class LinkedList {
     }
   }
 
-  removeAt(index) {}
+  removeAt(index) {
+    if (index === 0 && this.#list) {
+      this.#list = this.#list.nextNode;
+      return;
+    }
+
+    let count = 0;
+    let previousNode = null;
+    let currentNode = this.#list;
+
+    while (currentNode) {
+      if (count === index) {
+        previousNode.nextNode = currentNode.nextNode;
+        return;
+      }
+
+      previousNode = currentNode;
+      currentNode = currentNode.nextNode;
+      count++;
+    }
+  }
 }
