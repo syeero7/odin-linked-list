@@ -4,3 +4,140 @@ class Node {
     this.nextNode = null;
   }
 }
+
+export default class LinkedList {
+  #list;
+
+  constructor() {
+    this.#list = null;
+  }
+
+  append(value) {
+    const node = new Node();
+    node.value = value;
+
+    if (!this.#list) {
+      this.#list = node;
+      return;
+    }
+
+    let currentNode = this.#list;
+
+    while (currentNode.nextNode) {
+      currentNode = currentNode.nextNode;
+    }
+
+    currentNode.nextNode = node;
+  }
+
+  prepend(value) {
+    const node = new Node();
+
+    node.value = value;
+    node.nextNode = this.#list;
+    this.#list = node;
+  }
+
+  get size() {
+    let count = 0;
+    let currentNode = this.#list;
+
+    while (currentNode.nextNode) {
+      currentNode = currentNode.nextNode;
+      count++;
+    }
+
+    return count;
+  }
+
+  get head() {
+    return this.#list;
+  }
+
+  get tail() {
+    let currentNode = this.#list;
+
+    while (currentNode.nextNode) {
+      currentNode = currentNode.nextNode;
+    }
+
+    return currentNode;
+  }
+
+  at(index) {
+    let currentNode = this.#list;
+    let count = 0;
+
+    while (currentNode.nextNode) {
+      if (count === index) break;
+
+      currentNode = currentNode.nextNode;
+      count++;
+    }
+
+    return currentNode;
+  }
+
+  pop() {
+    let previousNode = null;
+    let currentNode = this.#list;
+
+    while (currentNode.nextNode) {
+      const next = currentNode.nextNode;
+
+      if (!next) {
+        previousNode.nextNode = null;
+        return;
+      }
+
+      previousNode = currentNode;
+      currentNode = next;
+    }
+  }
+
+  contains(value) {
+    let currentNode = this.#list;
+    if (!currentNode) return false;
+
+    do {
+      if (currentNode.value === value) return true;
+      currentNode = currentNode.nextNode;
+    } while (currentNode.nextNode);
+
+    return false;
+  }
+
+  find(value) {
+    let count = 0;
+    let currentNode = this.#list;
+    if (!currentNode) return null;
+
+    do {
+      if (currentNode.value === value) return count;
+      currentNode = currentNode.nextNode;
+      count++;
+    } while (currentNode.nextNode);
+
+    return null;
+  }
+
+  toString() {
+    let string = "";
+    let currentNode = this.#list;
+
+    do {
+      if (currentNode) {
+        string += `( ${currentNode.value} ) -> `;
+        currentNode = currentNode.nextNode;
+      }
+
+      if (!currentNode) string += "null";
+    } while (currentNode);
+
+    return string;
+  }
+
+  insertAt(value, index) {}
+
+  removeAt(index) {}
+}
