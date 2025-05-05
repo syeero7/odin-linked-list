@@ -140,7 +140,28 @@ export default class LinkedList {
     return string;
   }
 
-  insertAt(value, index) {}
+  insertAt(value, index) {
+    if (index === 0) return this.prepend(value);
+
+    let count = 0;
+    let previousNode = null;
+    let currentNode = this.#list;
+
+    while (currentNode) {
+      if (count === index) {
+        const node = new Node();
+
+        node.value = value;
+        node.nextNode = currentNode;
+        previousNode.nextNode = node;
+        return;
+      }
+
+      previousNode = currentNode;
+      currentNode = currentNode.nextNode;
+      count++;
+    }
+  }
 
   removeAt(index) {}
 }
