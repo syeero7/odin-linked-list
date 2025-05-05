@@ -79,19 +79,22 @@ export default class LinkedList {
   }
 
   pop() {
+    if (this.#list && !this.#list.nextNode) {
+      this.#list = null;
+      return;
+    }
+
     let previousNode = null;
     let currentNode = this.#list;
 
-    while (currentNode.nextNode) {
-      const next = currentNode.nextNode;
-
-      if (!next) {
+    while (currentNode) {
+      if (!currentNode.nextNode) {
         previousNode.nextNode = null;
         return;
       }
 
       previousNode = currentNode;
-      currentNode = next;
+      currentNode = currentNode.nextNode;
     }
   }
 
