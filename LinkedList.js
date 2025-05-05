@@ -42,7 +42,7 @@ export default class LinkedList {
     let count = 0;
     let currentNode = this.#list;
 
-    while (currentNode.nextNode) {
+    while (currentNode) {
       currentNode = currentNode.nextNode;
       count++;
     }
