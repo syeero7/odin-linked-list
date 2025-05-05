@@ -105,7 +105,7 @@ export default class LinkedList {
     do {
       if (currentNode.value === value) return true;
       currentNode = currentNode.nextNode;
-    } while (currentNode.nextNode);
+    } while (currentNode);
 
     return false;
   }
@@ -119,7 +119,7 @@ export default class LinkedList {
       if (currentNode.value === value) return count;
       currentNode = currentNode.nextNode;
       count++;
-    } while (currentNode.nextNode);
+    } while (currentNode);
 
     return null;
   }
